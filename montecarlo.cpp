@@ -2,25 +2,36 @@
 #include <iostream>
 #include <random>
 
-class MonteCarlo
-{
-    private:
-        double count;
-        double total;
-    public:
-        MonteCarlo(double count, double total);
-};
-
 struct Point
 {
     double x;
     double y;
 };
 
+class MonteCarlo
+{
+    private:
+        double count;
+        double total;
+        Point point;
+    public:
+        MonteCarlo(double count, double total);
+        double randomize();
+        bool determine(Point point);
+};
+
 MonteCarlo::MonteCarlo(double count, double total)
 {
     this->count = count;
     this->total = total;
+
+    for (int i = 0; i < total; i++) // Monte Carlo Method for Pi
+    {
+        Point point;
+        point.x = randomize();
+        point.y = randomize();
+        count = (determine(point)) ? count + 1 : count;
+    }
 
     double estimate = (double) 4 * (count/total); // Monte Carlo Method for Pi
     double error = abs(estimate - M_PI) / M_PI * 100; // Percent Error Formula
@@ -30,12 +41,12 @@ MonteCarlo::MonteCarlo(double count, double total)
     std::cout << "  Percent Error:              " << error << "%" << std::endl;
 }
 
-double randomize()
+double MonteCarlo::randomize()
 {
     return 2.0 * rand() / RAND_MAX - 1;
 }
 
-bool determine(Point point)
+bool MonteCarlo::determine(Point point)
 {
     double distance = abs(sqrt(pow(point.x, 2) + pow(point.y, 2))); // Distance Formula
     return (distance <= 1) ? true : false;
@@ -49,14 +60,6 @@ int main()
     std::cout << std::endl;
     std::cout << "  Enter number of points:     ";
     std::cin >> total;
-
-    for (int i = 0; i < total; i++)
-    {
-        Point point;
-        point.x = randomize();
-        point.y = randomize();
-        count = (determine(point)) ? count + 1 : count;
-    }
     
     MonteCarlo Pi(count, total);
     return 0;
