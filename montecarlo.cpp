@@ -1,24 +1,7 @@
+#include "montecarlo.hpp"
 #include <cmath>
 #include <iostream>
 #include <random>
-
-struct Point
-{
-    double x;
-    double y;
-};
-
-class MonteCarlo
-{
-    private:
-        double count;
-        double total;
-        Point point;
-    public:
-        MonteCarlo(double count, double total);
-        double randomize();
-        bool determine(Point point);
-};
 
 MonteCarlo::MonteCarlo(double count, double total)
 {
