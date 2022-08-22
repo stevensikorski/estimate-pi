@@ -6,3 +6,12 @@
 ### montecarlo.cpp
 
 > This program utilizes C++ object-orientated programming in order to estimate pi. The user must input a given number of points within the square. This allows the backend of the Monte Carlo Algorithm to calculate this estimation. Thus giving a result of the estimate of pi, value of pi, and a percent error that is all outputted within the command-line interface.
+
+### Compiling
+
+> ```
+> git clone https://github.com/stevensikorski/estimate-pi.git
+> cd estimate-pi
+> g++ montecarlo.cpp
+> ./a.out
+> ```
